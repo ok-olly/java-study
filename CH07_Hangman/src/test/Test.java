@@ -1,6 +1,8 @@
-package application;
+package test;
 
 import java.util.Random;
+
+import application.RandomWord;
 
 public class Test {
 
@@ -8,9 +10,9 @@ public class Test {
 		// 테스트용
 		RandomWord word = new RandomWord();
 		
-		//System.out.println(word.toString());
+		System.out.println(word.toString());
 		
-		Random random = new Random();
+		/*Random random = new Random();
 		
 		String[] words = {"펭수","고양이","라이언","늑대","소"};
 		
@@ -18,7 +20,7 @@ public class Test {
 		for(int i=0;i<100;i++) {
 			int n = random.nextInt(words.length); //배열의 크기만큼 랜덤숫자 생성
 			System.out.println(words[n]);
-		}
+		}*/
 
 	}
 
