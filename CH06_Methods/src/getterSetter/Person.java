@@ -5,16 +5,17 @@ public class Person {
 	private String name;
 	private int age;
 	//get,set 메소드로 변수에 접근
-	void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
+		//this는 본인 클래스의 객체를 가리킴
 	}
-	String getName() {
+	public String getName() {
 		return name;
 	}
-	void setAge(int age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
-	int getAge() {
+	public int getAge() {
 		return age;
 	}
 	
