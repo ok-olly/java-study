@@ -26,7 +26,7 @@ public class RandomWord {
 			sb.append(' ');
 		}
 		
-		System.out.println(selectWord);
+		//System.out.println(selectWord);
 		return sb.toString();
 	}
 	
@@ -45,6 +45,15 @@ public class RandomWord {
 			}
 		}
 		
+	}
+
+	public boolean isCompleted() { // 다 맞췄는가?
+		for(char c : characters) {
+			if(c=='\u0000') {
+				return false; //아직 캐릭터즈 배열에 못 맞춘 철자가 있음
+			}
+		}
+		return true; //다 맞췄음
 	}
 	
 }
