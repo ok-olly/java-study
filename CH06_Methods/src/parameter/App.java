@@ -9,13 +9,13 @@ public class App {
 		int number = 5;
 		int result = calc.square(number);
 		
-		System.out.printf("%dÀÇ Á¦°öÀº %dÀÌ´Ù.\n", number, result);
+		System.out.printf("%dì˜ ì œê³±ì€ %dì´ë‹¤.\n", number, result);
 		
 		result = calc.plus(10, 10);
-		System.out.printf("µÎ ¼öÀÇ ÇÕÀº %dÀÌ´Ù.\n", result);
+		System.out.printf("ë‘ ìˆ˜ì˜ í•©ì€ %dì´ë‹¤.\n", result);
 		
 		result = calc.minus(10, 10);
-		System.out.printf("µÎ ¼öÀÇ Â÷´Â %dÀÌ´Ù.\n", result);
+		System.out.printf("ë‘ ìˆ˜ì˜ ì°¨ëŠ” %dì´ë‹¤.\n", result);
 
 	}
 

@@ -3,10 +3,10 @@ package application;
 public class DoWhile {
 
 	public static void main(String[] args) {
-		// do while ¹®Àº Ã³À½ ÇÑ¹øÀº Á¶°Ç°ú »ó°ü¾øÀÌ ½ÇÇà
+		// do while ë¬¸ì€ ì²˜ìŒ í•œë²ˆì€ ì¡°ê±´ê³¼ ìƒê´€ì—†ì´ ì‹¤í–‰
 		int count = 100;
 		
-		System.out.println("do while ¹İº¹¹®");
+		System.out.println("do while ë°˜ë³µë¬¸");
 		
 		do {
 			System.out.println("Count: "+count);

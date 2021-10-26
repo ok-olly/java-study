@@ -5,11 +5,11 @@ public class App {
 	public static void main(String[] args) {
 		Person p1 = new Person();
 		p1.print();
-		//ÀÌ³ÊÅ¬·¡½º (°´Ã¼¸¦ ¸¸µé ¶§·Î ¸ÕÀú ¿ÜºÎÅ¬·¡½º °´Ã¼¸¦ ¸¸µé°í ¸¸µé ¼ö ÀÖ´Ù.)
+		//ì´ë„ˆí´ë˜ìŠ¤ (ê°ì²´ë¥¼ ë§Œë“¤ ë•Œë¡œ ë¨¼ì € ì™¸ë¶€í´ë˜ìŠ¤ ê°ì²´ë¥¼ ë§Œë“¤ê³  ë§Œë“¤ ìˆ˜ ìˆë‹¤.)
 		Person.Head head = p1.new Head();
 		head.print();
 		
-		//½ºÅ×Æ½ ÀÌ³Ê Å¬·¡½º ¿ÜºÎ°´Ã¼¿¡¼­ ¹Ù·Î .Body();
+		//ìŠ¤í…Œí‹± ì´ë„ˆ í´ë˜ìŠ¤ ì™¸ë¶€ê°ì²´ì—ì„œ ë°”ë¡œ .Body();
 		Person.Body body = new Person.Body();
 		body.print();
 	}

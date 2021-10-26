@@ -3,7 +3,7 @@ package application;
 public class Ex2 {
 
 	public static void main(String[] args) {
-		// ÀÌÁß¹è¿­
+		// ì´ì¤‘ë°°ì—´
 		int[][] values = { { 1, 5, 7 }, { 9, 6, 3 }, { 2, 4, 6 } };
 
 		int total = 0;
@@ -14,7 +14,7 @@ public class Ex2 {
 			}
 		}
 
-		System.out.println("ÃÑÇÕÀº :" + total);
+		System.out.println("ì´í•©ì€ :" + total);
 
 	}
 

@@ -2,8 +2,8 @@ package game.objects;
 
 public class Rock extends GameObject {
 	public Rock() {
-		// ¹ÙÀ§ »ı¼ºÀÚ
+		// ë°”ìœ„ ìƒì„±ì
 		setId(1);
-		setName("¹ÙÀ§");
+		setName("ë°”ìœ„");
 	}
 }

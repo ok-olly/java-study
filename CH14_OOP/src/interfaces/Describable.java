@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface Describable {
-	String getDescription(); //Public abstract°¡ »ı·«µÊ. ÀÎÅÍÆäÀÌ½ºÀÇ ¸Ş¼Òµå´Â ¸ğµÎ Ãß»ó¸Ş¼Òµå
+	String getDescription(); //Public abstractê°€ ìƒëµë¨. ì¸í„°í˜ì´ìŠ¤ì˜ ë©”ì†Œë“œëŠ” ëª¨ë‘ ì¶”ìƒë©”ì†Œë“œ
 }

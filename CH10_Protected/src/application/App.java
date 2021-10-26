@@ -8,7 +8,7 @@ public class App {
 
 	public static void main(String[] args) {
 		Fruit f1 = new Apple();
-		//f1.id = ´Ù¸¥ ÆĞÅ°Áö¿¡¼­ protected Á¢±Ù ºÒ°¡
+		//f1.id = ë‹¤ë¥¸ íŒ¨í‚¤ì§€ì—ì„œ protected ì ‘ê·¼ ë¶ˆê°€
 		System.out.println(f1);
 		
 		Fruit f2 = new Banana();

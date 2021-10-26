@@ -1,22 +1,22 @@
 package school;
 
 public class Student {
-	//º¯¼ö
+	//ë³€ìˆ˜
 	private String name;
 	private int age;
 	private boolean isVisible;
 	private double temperature;
 	
-	//»ı¼ºÀÚ
+	//ìƒì„±ì
 	public Student() {
-		// ±âº»»ı¼ºÀÚ
-		name = "ÀÌ¸§¸ğ¸§";
+		// ê¸°ë³¸ìƒì„±ì
+		name = "ì´ë¦„ëª¨ë¦„";
 		age= 18;
 		isVisible = false;
 		temperature = 36.0;
 	}
 	
-		// ¸Å°³º¯¼ö ³ÖÀº »ı¼ºÀÚ ÀÚµ¿»ı¼º
+		// ë§¤ê°œë³€ìˆ˜ ë„£ì€ ìƒì„±ì ìë™ìƒì„±
 	public Student(String name, int age, boolean isVisible, double temperature) {
 		this.name = name;
 		this.age = age;
@@ -26,7 +26,7 @@ public class Student {
 
 
 
-	//getter setter ÀÚµ¿»ı¼º
+	//getter setter ìë™ìƒì„±
 	public String getName() {
 		return name;
 	}
@@ -54,7 +54,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [name=" + name + ", age=" + age + ", ÁıÃ¼=" + isVisible + ", temperature=" + temperature
+		return "Student [name=" + name + ", age=" + age + ", ì§‘ì²´=" + isVisible + ", temperature=" + temperature
 				+ "]";
 	}
 	

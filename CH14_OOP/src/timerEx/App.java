@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
 
 class Alert extends TimerTask {
 	public void run() {
-		System.out.println("°è¶õ »î´Â Áß");
+		System.out.println("ê³„ëž€ ì‚¶ëŠ” ì¤‘");
 	}
 }
 
 class Task implements Runnable {
 	public void run() {
-		JOptionPane.showMessageDialog(null, "°è¶õ »î±â ¿Ï·á");
+		JOptionPane.showMessageDialog(null, "ê³„ëž€ ì‚¶ê¸° ì™„ë£Œ");
 	}
 }
 

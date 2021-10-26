@@ -5,7 +5,7 @@ public class Gamble {
 	/*public static void main(String[] args) {
 		double dollar = dice() + dice() + dice();
 		double won = exchange(dollar);
-		System.out.printf("È¹µæ ±İ¾×: $%.2f(%.0f¿ø",dollar,won);
+		System.out.printf("íšë“ ê¸ˆì•¡: $%.2f(%.0fì›",dollar,won);
 	}
 	
 	private static int dice() {

@@ -7,11 +7,11 @@ import gui.MainFrame;
 public class App {
 
 	public static void main(String[] args) {
-		// JFrameю╦╥н ю╘╣╣©Л ц╒ ╦╦╣И╠Б
+		// JFrameЛ°╪К║° Л°┬К▐└Л ╟ Л╟╫ К╖▄К⌠╓Й╦╟
 		
 		SwingUtilities.invokeLater(()->{
 			
-			new MainFrame("ев╫╨ф╝ ╫╨ю╝"); //╩У ц╒ mainFrameю╩ ╩Щ╪╨
+			new MainFrame("М┘▄Л┼╓М┼╦ Л┼╓Л°≥"); //Л┐┬ Л╟╫ mainFrameЛ²└ Л┐²Л└╠
 						
 		});
 		

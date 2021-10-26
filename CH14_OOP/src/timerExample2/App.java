@@ -15,7 +15,7 @@ public class App {
 	public static void main(String[] args) {
 
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-		executor.scheduleAtFixedRate(new Task(), 0, 1, TimeUnit.SECONDS); //ÇÒÀÏ,µô·¹ÀÌ½Ã°£,¹İº¹½Ã°£,½Ã°£Å¸ÀÔ
+		executor.scheduleAtFixedRate(new Task(), 0, 1, TimeUnit.SECONDS); //í• ì¼,ë”œë ˆì´ì‹œê°„,ë°˜ë³µì‹œê°„,ì‹œê°„íƒ€ì…
 
 	}
 

@@ -1,7 +1,7 @@
 package anonymous_Class;
 
 public class App {
-	private String name = "Æë¼ö";
+	private String name = "í­ìˆ˜";
 
 	public static void main(String[] args) {
 		new App().start();
@@ -9,9 +9,9 @@ public class App {
 	}
 	private void start() {
 		//System.out.println(name);
-//		Runnable runner = new Runnable() { //ÀÍ¸íÅ¬·¡½º
+//		Runnable runner = new Runnable() { //ìµëª…í´ë˜ìŠ¤
 //			public void run() {
-//				System.out.println(name); //³»ºÎÅ¬·¡½º·Î ¿ÜºÎÅ¬·¡½ºÀÇ º¯¼ö »ç¿ë
+//				System.out.println(name); //ë‚´ë¶€í´ë˜ìŠ¤ë¡œ ì™¸ë¶€í´ë˜ìŠ¤ì˜ ë³€ìˆ˜ ì‚¬ìš©
 //			}
 //		};
 		
@@ -22,7 +22,7 @@ public class App {
 		});
 	}
 	private void activate(Runnable runnable) {
-		runnable.run(); //Ãß»ó¸Ş¼Òµå runÀ» ½ÇÇà
+		runnable.run(); //ì¶”ìƒë©”ì†Œë“œ runì„ ì‹¤í–‰
 	}
 
 }

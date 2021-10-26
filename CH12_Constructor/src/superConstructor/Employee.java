@@ -4,8 +4,8 @@ public class Employee extends Person {
 
 	public Employee() {
 		//super();
-		//¤¤ PersonÀÇ »ı¼ºÀÚ°¡ »ı·«µÊ, Áï Person »ı¼ºÀÚ ¸ÕÀú ½ÇÇàµÊ
-		super("ÀÍ¸í");
-		System.out.println("Emp »ı¼ºÀÚ");
+		//ã„´ Personì˜ ìƒì„±ìê°€ ìƒëµë¨, ì¦‰ Person ìƒì„±ì ë¨¼ì € ì‹¤í–‰ë¨
+		super("ìµëª…");
+		System.out.println("Emp ìƒì„±ì");
 	}
 }

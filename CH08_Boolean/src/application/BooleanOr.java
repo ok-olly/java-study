@@ -3,23 +3,23 @@ package application;
 public class BooleanOr {
 
 	public static void main(String[] args) {
-		// AND OR µ¿½Ã¿¡ »ç¿ë
-		boolean isRaining = false; // ºñ°¡ ¿À´Â°¡?
-		boolean mightRain = true; //ºñ°¡ ¿Ã ¼öµµ ÀÖ´Â°¡?
-		boolean haveUmbrella = true; //¿ì»êÀÌ ÀÖ´Â°¡?
+		// AND OR ë™ì‹œì— ì‚¬ìš©
+		boolean isRaining = false; // ë¹„ê°€ ì˜¤ëŠ”ê°€?
+		boolean mightRain = true; //ë¹„ê°€ ì˜¬ ìˆ˜ë„ ìˆëŠ”ê°€?
+		boolean haveUmbrella = true; //ìš°ì‚°ì´ ìˆëŠ”ê°€?
 		
 		if((isRaining || mightRain) && haveUmbrella) {
-			System.out.println("¿ì»êÀ» ¾´´Ù!");
+			System.out.println("ìš°ì‚°ì„ ì“´ë‹¤!");
 		} else {
-			System.out.println("¿ì»êÀ» ¾²Áö ¾Ê´Â´Ù.");
+			System.out.println("ìš°ì‚°ì„ ì“°ì§€ ì•ŠëŠ”ë‹¤.");
 		}
 		
-		boolean rainCheck = isRaining || mightRain; //ºñ°¡ ¿À°Å³Ê³ª ¿Ã ¼öµµ ÀÖ°Å³ª ÀÏ¶§ Âü
+		boolean rainCheck = isRaining || mightRain; //ë¹„ê°€ ì˜¤ê±°ë„ˆë‚˜ ì˜¬ ìˆ˜ë„ ìˆê±°ë‚˜ ì¼ë•Œ ì°¸
 		
 		if((rainCheck || mightRain) && haveUmbrella) {
-			System.out.println("¿ì»êÀ» ¾´´Ù!");
+			System.out.println("ìš°ì‚°ì„ ì“´ë‹¤!");
 		} else {
-			System.out.println("¿ì»êÀ» ¾²Áö ¾Ê´Â´Ù.");
+			System.out.println("ìš°ì‚°ì„ ì“°ì§€ ì•ŠëŠ”ë‹¤.");
 		}
 	}
 

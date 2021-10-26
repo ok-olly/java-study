@@ -5,10 +5,10 @@ public class App {
 	public static void main(String[] args) {
 		
 		Person p1 = new Person();
-		System.out.println(p1); //(peson.toString())°ú °°´Ù
-		Person p2 = new Person("Æë¼ö");
+		System.out.println(p1); //(peson.toString())ê³¼ ê°™ë‹¤
+		Person p2 = new Person("í­ìˆ˜");
 		System.out.println(p2);
-		Person p3 = new Person("¶óÀÌ¾ğ",27);
+		Person p3 = new Person("ë¼ì´ì–¸",27);
 		System.out.println(p3);
 
 	}

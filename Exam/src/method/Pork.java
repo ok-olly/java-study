@@ -8,7 +8,7 @@ public class Pork {
 	private static double calculateCalory(int x) {
 		return 180 * x * 5.179;
 		
-		//System.out.println("ªÔ∞„ªÏ " + x + "¿Œ∫–:" + result + "kcal");
+		//System.out.println("ÏÇºÍ≤πÏÇ¥ " + x + "Ïù∏Î∂Ñ:" + result + "kcal");
 	}	
 	
 }

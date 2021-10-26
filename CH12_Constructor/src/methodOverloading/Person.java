@@ -1,7 +1,7 @@
 package methodOverloading;
 
 public class Person {
-	//¸Ş¼Òµå ¿À¹ö·Îµù => ¸Ş¼ÒµåÀÇ ÀÌ¸§Àº °°Áö¸¸ ¸Å°³º¯¼ö(parameter)°¡ ´Ù¸¦ ¶§
+	//ë©”ì†Œë“œ ì˜¤ë²„ë¡œë”© => ë©”ì†Œë“œì˜ ì´ë¦„ì€ ê°™ì§€ë§Œ ë§¤ê°œë³€ìˆ˜(parameter)ê°€ ë‹¤ë¥¼ ë•Œ
 	public void greet() {
 		System.out.println("Hello!");
 	}
@@ -12,14 +12,14 @@ public class Person {
 	
 	public void greet(int height) {
 		if(height > 185) {
-			System.out.println("Å°°¡ Å©±º¿ä");
+			System.out.println("í‚¤ê°€ í¬êµ°ìš”");
 		}
 		System.out.println("Hello! ");
 	}
 	
 	public void greet(String name, int height) {
 		if(height > 185) {
-			System.out.println("Å°°¡ Å©±º¿ä");
+			System.out.println("í‚¤ê°€ í¬êµ°ìš”");
 		}
 		System.out.println("Hello! "+name);
 	}	

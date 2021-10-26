@@ -4,7 +4,7 @@ public class Computer implements Describable {
 
 	@Override
 	public String getDescription() {
-		return "Computer�Դϴ�";
+		return "Computer입니다";
 	}
 
 }

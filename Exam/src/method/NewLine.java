@@ -15,6 +15,6 @@ public class NewLine {
 	}
 
 	private static void oneLine() {
-		System.out.println(); //ÇÑÁÙ¶ç¿ò
+		System.out.println(); //í•œì¤„ë„ì›€
 	}
 }

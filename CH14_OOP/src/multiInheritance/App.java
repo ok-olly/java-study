@@ -5,17 +5,17 @@ public class App {
 	public static void main(String[] args) {
 		
 		Person p1 = new Person();
-		//Speaker s1 = new Speaker(); ºÒ°¡´É
+		//Speaker s1 = new Speaker(); ë¶ˆê°€ëŠ¥
 		p1.greet();
 		p1.speak();
 		
 		Speaker p2 = new Person();
 		p2.speak();
-		//p2.greet(); ºÒ°¡´É. ½ºÇÇÄ¿ ÀÎÅÍÆäÀÌ½º¿¡´Â greet ¸Ş¼Òµå ¾øÀ½
+		//p2.greet(); ë¶ˆê°€ëŠ¥. ìŠ¤í”¼ì»¤ ì¸í„°í˜ì´ìŠ¤ì—ëŠ” greet ë©”ì†Œë“œ ì—†ìŒ
 		
 		Greeter p3 = new Person();
 		p3.greet();
-		//p3.speak(); ºÒ°¡´É. ±×¸®ÅÍ ÀÎÅÍÆäÀÌ½º¿¡´Â speak ¸Ş¼Òµå ¾øÀ½
+		//p3.speak(); ë¶ˆê°€ëŠ¥. ê·¸ë¦¬í„° ì¸í„°í˜ì´ìŠ¤ì—ëŠ” speak ë©”ì†Œë“œ ì—†ìŒ
 		
 		
 	}
