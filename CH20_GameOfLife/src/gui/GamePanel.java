@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private final static int CELLSIZE = 100; //격자의 크기설정
+	private final static int CELLSIZE = 30; //격자의 크기설정
 	private final static Color backgroundColor = Color.BLACK; //배경색 검은색
 	private final static Color gridColor = Color.GRAY; //격자선색 회색
 	
@@ -61,6 +61,10 @@ public class GamePanel extends JPanel {
 		
 		if(world == null) { //아직 world가 생성되지 않았으면 새로 생성
 			world = new World(rows, cols);
+		} else { //이미 world객체가 만들어져 있다면 
+			if(world.getRows() != rows || world.getColumns() != cols) {
+				world = new World(rows, cols); //새로 만듦(리사이즈)
+			}
 		}
 		
 		//world.setCell(0, 0, true); //grid 이중배열에 좌표(줄,열) 값을 true로 set
@@ -103,6 +107,30 @@ public class GamePanel extends JPanel {
 			//줄을 긋는 메소드(x1,y1) (x2,y2)
 			g2.drawLine(leftRightMargin, y, width-leftRightMargin, y);
 		}
+		
+	}
+
+	public void randomize() {
+		// 엔터키를 눌렀을 때 => 랜덤으로 그리드 생성
+		world.randomize();
+		//리프레시
+		repaint();
+		
+	}
+
+	public void clear() {
+		// 백스페이스를 눌렀을 때 => 모든 셀을 false로 검은색
+		world.clear();
+		//리프레시
+		repaint();
+		
+	}
+
+	public void next() {
+		// 스페이스바를 눌렀을 때 => 주변 그리드 Active
+		world.next();
+		//리프레시
+		repaint();
 		
 	}
 	
