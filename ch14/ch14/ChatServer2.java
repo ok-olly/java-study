@@ -73,19 +73,90 @@ public class ChatServer2 {
 		@Override
 		public void run() {
 			try {
-
+				// Client에게 최초로 보내는 메세지
+				out.println("사용하실 아이디를 입력하세요.");
+				while (true) {
+					String line = in.readLine();
+					if (line == null) {
+						break;
+					} else {
+						routine(line);
+					}
+				}
 			} catch (Exception e) {
-
+				// Client 연결이 끊어질 때 Vector에서 자신의 객체를 제거한다.
+				removeClient(this);
+				System.err.println(sock + " [" + id + "] 끊어짐");
+				// e.printStackTrace();
 			}
 		}
 
 		// Client로 부터 요청된 문자열을 분석하는 메소드
 		public void routine(String line) {
+			System.out.println("line : " + line);
+			// CHATALL:오늘은 월요일입니다.
+			int idx = line.indexOf(":");
+			String cmd/* CHATALL */ = line.substring(0, idx);
+			String data/* 오늘은 월요일입니다. */ = line.substring(idx + 1);
+			if (cmd.equals(ChatProtocol2.ID)) {
+				// data = aaa
+				if (data != null && data.length() > 0) {
+					id = data;
+					// 새로운 접속자가 추가되었기 때문에 리스트 재전송
+					sendAllMessage(ChatProtocol2.CHATLIST + ":" + getIds());
+					// 모든 접속자에게 입장 메세지를 전송
+					sendAllMessage(ChatProtocol2.CHATALL + ":" + "[" + id + "]님이 입장하였습니다.");
+				}
+			} else if (cmd.equals(ChatProtocol2.CHAT)) {
+				// data : bbb;밥먹자
+				idx = data.indexOf(';');
+				cmd/* bbb */ = data.substring(0, idx);
+				data/* 밥먹자 */ = data.substring(idx);
+				// bbb 클라이언트 객체
+				ClientThread2 ct = findClient(cmd);
+				if (ct != null) {
+					ct.sendMessage(ChatProtocol2.CHAT + ":" + "[" + id + "(S)]" + data);
+				} else {// 내 자신에게 보냄
+					sendMessage(ChatProtocol2.CHAT + ":" + "[" + cmd + "] 접속자가 아닙니다.");
+				}
+			} else if (cmd.equals(ChatProtocol2.MESSAGE)) {
+				idx = data.indexOf(';');
+				cmd = data.substring(0, idx);
+				data = data.substring(idx);
+				ClientThread2 ct = findClient(cmd);
+				if (ct != null) {
+					ct.sendMessage(ChatProtocol2.MESSAGE + ":" + id + ";" + data);
+				} else {// 내 자신에게 보냄
+					sendMessage(ChatProtocol2.CHAT + ":" + "[" + cmd + "] 접속자가 아닙니다.");
+				}
+			} else if (cmd.equals(ChatProtocol2.CHATALL)) {
+				sendAllMessage(ChatProtocol2.CHATALL+":"+"["+id+"]"+data);
+			}
+		}
 
+		// 매개변수로 받은 id값으로 ClientThread2를 검색한다.
+		public ClientThread2 findClient(String id) {
+			ClientThread2 ct = null;
+			for (int i = 0; i < vc.size(); i++) {
+				ct = vc.get(i);
+				if (id.equals(ct.id))
+					break;
+			}
+			return ct;
+		}
+
+		// 접속된 모든 아이디 리턴
+		public String getIds() {
+			String ids = "";
+			for (int i = 0; i < vc.size(); i++) {
+				ClientThread2 ct = vc.get(i);
+				ids += ct.id + ";";// 104라인에서 id값을 넣어준다.
+			}
+			return ids;// aaa;bbb;홍길동;ccc
 		}
 
 		public void sendMessage(String msg) {
-
+			out.println(msg);
 		}
 
 	}
