@@ -23,8 +23,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-public class ChatClientAWT2 extends MFrame 
-implements ActionListener, Runnable {
+public class ChatClientAWT2 extends MFrame implements ActionListener, Runnable {
 
 	Button bt1, bt2, bt3, bt4;
 	TextField tf1, tf2, tf3;
@@ -41,7 +40,7 @@ implements ActionListener, Runnable {
 		setTitle("ChatClient 2.1");
 		Panel p1 = new Panel();
 		p1.add(new Label("Host", Label.RIGHT));
-		p1.add(tf1 = new TextField("127.0.0.1"));
+		p1.add(tf1 = new TextField("172.30.1.11"));
 		p1.add(new Label("Port", Label.RIGHT));
 		p1.add(tf2 = new TextField("8002"));
 		bt1 = new Button("connect");
@@ -81,44 +80,141 @@ implements ActionListener, Runnable {
 		add(BorderLayout.SOUTH, p4);
 		validate();
 	}
-	
+
 	public void run() {
-		
+		try {
+			String host = tf1.getText().trim();
+			int port = Integer.parseInt(tf2.getText().trim());
+			connect(host, port);
+			// 서버 -> 사용하실 아이디를 입력하세요.
+			area.append(in.readLine() + "\n");
+			while (true) {
+				String line = in.readLine();
+				if (line == null)
+					break;
+				else
+					routine(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
+	public void connect(String host, int port) {
+		try {
+			sock = new Socket(host, port);
+			in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			out = new PrintWriter(sock.getOutputStream(), true/* auto flush */);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}// --connect
+
 	public void actionPerformed(ActionEvent e) {
-		
-	}//----------actionPerformed
+		Object obj = e.getSource();
+		if (obj == bt1 /* connect */) {
+			// connect -> 서버 연결하고 run 메소드 호출
+			new Thread(this).start();
+			bt1.setEnabled(false);
+			tf1.setEnabled(false); // host
+			tf2.setEnabled(false); // port
+			area.setText("");
+		} else if (obj == bt2/* save */) {
+			String content = area.getText();
+			//1970년1월1일~현재까지 1/1000초 단위로 계산됨
+			long fileName = System.currentTimeMillis();
+			try {
+				FileWriter fw = new FileWriter("ch14/"+fileName+".txt");
+				fw.write(content);
+				fw.close();
+				area.setText("");
+				new MDialog(this, "Save", "대화내용을 저장했습니다.");
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} else if (obj == bt3/* message */) {
+			int i = list.getSelectedIndex();
+			if (i == -1 || i == 0) {
+				new MDialog(this, "경고", "아이디를 선택하세요.");
+			} else {
+				new Message("TO:");
+			}
+		} else if (obj == bt4/* send */ || obj == tf3) {
+			String str = tf3.getText();
+			if (filterMgr(str)) {
+				new MDialog(this, "경고", "입력하신 글자는 금지어입니다.");
+				return;// 메소드 중간에 빠져나가는 결과. 즉 밑에 소스는 의미가 없어진다. 반복문의 break같은 느낌
+			}
+			if (!flag/* 아이디입력 */) {
+				sendMessage(ChatProtocol2.ID + ":" + str); // 서버전송
+				setTitle(getTitle() + "-" + str + "님 반갑습니다.");
+				area.setText("");
+				tf3.setText("");
+				tf3.requestFocus();
+				flag = true;
+			} else/* 일반채팅 */ {
+				int i = list.getSelectedIndex();
+				if (i == -1 || i == 0) { // 전체채팅
+					sendMessage(ChatProtocol2.CHATALL + ":" + str);
+				} else { // 귓속말 채팅
+					String id = list.getSelectedItem();// 선택한 id값을 리턴해온다.
+					sendMessage(ChatProtocol2.CHAT + ":" + id + ";" + str);
+				}
+				tf3.setText("");
+				tf3.requestFocus();
+			}
+		}
+	}// ----------actionPerformed
 
 	public void routine(String line) {
-		
-	}//routine
-	
+		int idx = line.indexOf(":");
+		String cmd = line.substring(0, idx);
+		String data = line.substring(idx + 1);
+		if (cmd.equals(ChatProtocol2.CHATLIST)) {
+			// data:aaa;bbb;ccc
+			list.removeAll();// 기존에 추가된 item을 모두 삭제
+			list.add(listTitle);
+			StringTokenizer st = new StringTokenizer(data, ";");
+			while (st.hasMoreTokens()) {
+				list.add(st.nextToken());
+			}
+		} else if (cmd.equals(ChatProtocol2.CHAT) || cmd.equals(ChatProtocol2.CHATALL)) {
+			// CHATALL:[aaa]채팅메세지 & CHAT:[aaa(S)]채팅메세지
+			area.append(data + "\n");
+		} else if (cmd.equals(ChatProtocol2.MESSAGE)) {
+			// data -> bbb;밥먹자
+			idx = data.indexOf(';');
+			cmd/* bbb */ = data.substring(0, idx);
+			data/* 밥먹자 */ = data.substring(idx);
+			new Message("FROM", cmd, data);
+		}
+	}// routine
+
 	public void sendMessage(String msg) {
 		out.println(msg);
 	}
 
-	public boolean filterMgr(String msg){
-		boolean flag = false;//false이면 금지어 아님
-		String str[] = {"바보","개새끼","새끼","자바","java"};
-		//하하 호호 히히
-		StringTokenizer st = new StringTokenizer(msg);
+	public boolean filterMgr(String msg) {
+		boolean flag = false;// false이면 금지어 아님
+		String str[] = { "바보", "개새끼", "새끼", "자바", "java" };
+		// msg : 하하 호호 히히
+		StringTokenizer st = new StringTokenizer(msg);// 생략하면 구분자는 공백이다.
 		String msgs[] = new String[st.countTokens()];
 		for (int i = 0; i < msgs.length; i++) {
 			msgs[i] = st.nextToken();
 		}
 		for (int i = 0; i < str.length; i++) {
-			if(flag) break;
+			if (flag)
+				break; // 첫번째 for문 빠져나감
 			for (int j = 0; j < msgs.length; j++) {
-				if(str[i].equals(msgs[j])){
+				if (str[i].equals(msgs[j])) {
 					flag = true;
-					break;
-				}
-			}
-		}
+					break; // 두번째 for문 빠져나감
+				} // if
+			} // for2
+		} // for1
 		return flag;
 	}
-	
 
 	class Message extends Frame implements ActionListener {
 
@@ -135,6 +231,7 @@ implements ActionListener, Runnable {
 			layset("");
 			validate();
 		}
+
 		public Message(String mode, String id, String msg) {
 			setTitle("쪽지읽기");
 			this.mode = mode;
@@ -142,18 +239,19 @@ implements ActionListener, Runnable {
 			layset(msg);
 			validate();
 		}
+
 		public void layset(String msg) {
-			 addWindowListener(new WindowAdapter() {
-				   public void windowClosing(WindowEvent e) {
-				    dispose();
-				   }
+			addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					dispose();
+				}
 			});
 			Panel p1 = new Panel();
 			p1.add(new Label(mode, Label.CENTER));
 			name = new TextField(id, 20);
 			p1.add(name);
 			add(BorderLayout.NORTH, p1);
-			
+
 			ta = new TextArea("");
 			add(BorderLayout.CENTER, ta);
 			ta.setText(msg);
@@ -165,46 +263,45 @@ implements ActionListener, Runnable {
 			p2.add(close = new Button("close"));
 			close.addActionListener(this);
 			add(BorderLayout.SOUTH, p2);
-			
+
 			setBounds(200, 200, 250, 250);
 			setVisible(true);
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()==send){
-				sendMessage(ChatProtocol2.MESSAGE+
-						":"+id+";"+ ta.getText());
+			if (e.getSource() == send) {
+				sendMessage(ChatProtocol2.MESSAGE + ":" + id + ";" + ta.getText());
 			}
 			setVisible(false);
 			dispose();
 		}
 	}
 
-	class MDialog extends Dialog implements ActionListener{
-		
+	class MDialog extends Dialog implements ActionListener {
+
 		Button ok;
 		ChatClientAWT2 ct2;
-		
-		public MDialog(ChatClientAWT2 ct2,String title, String msg) {
+
+		public MDialog(ChatClientAWT2 ct2, String title, String msg) {
 			super(ct2, title, true);
 			this.ct2 = ct2;
-			 //////////////////////////////////////////////////////////////////////////////////////////
-			   addWindowListener(new WindowAdapter() {
-			    public void windowClosing(WindowEvent e) {
-			     dispose();
-			    }
-			   });
-			   /////////////////////////////////////////////////////////////////////////////////////////
-			   setLayout(new GridLayout(2,1));
-			   Label label = new Label(msg, Label.CENTER);
-			   add(label);
-			   add(ok = new Button("확인"));
-			   ok.addActionListener(this);
-			   layset();
-			   setVisible(true);
-			   validate();
+			//////////////////////////////////////////////////////////////////////////////////////////
+			addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					dispose();
+				}
+			});
+			/////////////////////////////////////////////////////////////////////////////////////////
+			setLayout(new GridLayout(2, 1));
+			Label label = new Label(msg, Label.CENTER);
+			add(label);
+			add(ok = new Button("확인"));
+			ok.addActionListener(this);
+			layset();
+			setVisible(true);
+			validate();
 		}
-		
+
 		public void layset() {
 			int x = ct2.getX();
 			int y = ct2.getY();
@@ -212,8 +309,7 @@ implements ActionListener, Runnable {
 			int h = ct2.getHeight();
 			int w1 = 150;
 			int h1 = 100;
-			setBounds(x + w / 2 - w1 / 2, 
-					y + h / 2 - h1 / 2, 200, 100);
+			setBounds(x + w / 2 - w1 / 2, y + h / 2 - h1 / 2, 200, 100);
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -221,7 +317,7 @@ implements ActionListener, Runnable {
 			dispose();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new ChatClientAWT2();
 	}
