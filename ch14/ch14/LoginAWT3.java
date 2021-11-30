@@ -21,6 +21,10 @@ class LoginAWT3 extends MFrame implements ActionListener {
 	BufferedReader in;
 	PrintWriter out;
 	String id;
+	String ip = "127.0.0.1";
+	int port = 8003;
+	String title = "MyChat 3.0";
+	String label[] = {"ID와 PASS을 입력하세요.","ID와 PASS를 확인하세요.","이중 접속입니다."};
 
 	public LoginAWT3() {
 		super(450, 400, new Color(100, 200, 100));
@@ -33,7 +37,7 @@ class LoginAWT3 extends MFrame implements ActionListener {
 		idTx = new TextField("aaa");
 		pwTx = new TextField("1234");
 		logBtn = new Button("로그인");
-		msgl = new Label("ID와 PASS을 입력하세요.");
+		msgl = new Label(label[0]);
 		logo.setBounds(100, 50, 250, 100);
 		idl.setBounds(150, 200, 50, 20);
 		idTx.setBounds(200, 200, 100, 20);
@@ -72,10 +76,15 @@ class LoginAWT3 extends MFrame implements ActionListener {
 				if (cmd.equals(ChatProtocol3.ID)) {
 					if (data.equals("F")) {
 						msgl.setForeground(Color.red);
-						msgl.setText("ID와 PASS를 확인하세요.");
+						msgl.setText(label[1]);
+					} else if (data.equals("C")) {
+						msgl.setForeground(Color.blue);
+						msgl.setText(label[2]);
 					} else if (data.equals("T")) {
-						//dispose();
-						setTitle("로그인 성공");
+						//setTitle("로그인 성공");
+						//repaint();
+						dispose();
+						new ChatClientAWT3(in, out, id);
 					}
 				} 
 			}

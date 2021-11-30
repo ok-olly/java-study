@@ -105,12 +105,18 @@ public class ChatServer3 {
 				cmd = data.substring(0, idx); //aaa
 				data = data.substring(idx+1); //1234
 				if (mgr.loginChk(cmd, data)) {
-					id = cmd;
-					sendMessage(ChatProtocol3.ID + ":"+"T");
-					// 새로운 접속자가 추가되었기 때문에 리스트 재전송
-					sendAllMessage(ChatProtocol3.CHATLIST + ":" + getIds());
-					// 모든 접속자에게 입장 메세지를 전송
-					sendAllMessage(ChatProtocol3.CHATALL + ":" + "[" + id + "]님이 입장하였습니다.");
+					//접속한 id으로 ClientThread3 찾는다.
+					ClientThread3 ct = findClient(cmd);
+					if(ct.id.equals(cmd)) { //이중접속
+						sendMessage(ChatProtocol3.ID + ":"+"C");
+					} else {
+						id = cmd;
+						sendMessage(ChatProtocol3.ID + ":"+"T");
+						// 새로운 접속자가 추가되었기 때문에 리스트 재전송
+						sendAllMessage(ChatProtocol3.CHATLIST + ":" + getIds());
+						// 모든 접속자에게 입장 메세지를 전송
+						sendAllMessage(ChatProtocol3.CHATALL + ":" + "[" + id + "]님이 입장하였습니다.");
+					}					
 				} else {//로그인 실패
 					sendMessage(ChatProtocol3.ID + ":"+"F");
 				}
