@@ -25,11 +25,13 @@ public class ZipcodeFrame extends Frame implements ActionListener {
 	JPanel p1, p2;
 	ZipcodeMgr mgr;
 	DialogBox err1, err2;
-
-	public ZipcodeFrame() {
-		// this.awt = awt;
+	MemberAWT awt;
+	
+	public ZipcodeFrame(MemberAWT awt) {
+		this.awt = awt;
 		setTitle("ZipcodeFrame");
-		setBounds(500, 500, 300, 500);
+		//setBounds(w,y,w,h) : awt에서 오른쪽 옆에 호출된다.
+		setBounds(awt.getX()+awt.getWidth(),awt.getY(), 300, 500);
 		mgr = new ZipcodeMgr();
 		p1 = new JPanel();
 		p1.setBackground(Color.LIGHT_GRAY);
@@ -99,12 +101,12 @@ public class ZipcodeFrame extends Frame implements ActionListener {
 					}
 				}
 			}
-		} else if (obj == list || obj == searchBtn) {
-
+		} else if (obj == list || obj == selectBtn) {
+			String adds = list.getSelectedItem();
+			awt.tf4.setText(adds);
+			list.removeAll();
+			dispose();
 		}
 	}
 
-	public static void main(String[] args) {
-		new ZipcodeFrame();
-	}
 }

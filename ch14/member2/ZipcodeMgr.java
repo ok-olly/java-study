@@ -31,7 +31,7 @@ public class ZipcodeMgr {
 				bean.setZipcode(rs.getString(1)); //zipcode 컬럼
 				bean.setArea1(rs.getString(2));
 				bean.setArea2(rs.getString(3));
-				bean.setArea3(rs.getString(4));
+				bean.setArea3(rs.getString(4).trim());
 				vlist.addElement(bean);
 			}
 		} catch (Exception e) {
