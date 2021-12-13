@@ -98,16 +98,16 @@ public class ChatServer2 {
 			int idx = line.indexOf(":");
 			String cmd/* CHATALL */ = line.substring(0, idx);
 			String data/* 오늘은 월요일입니다. */ = line.substring(idx + 1);
-			if (cmd.equals(ChatProtocol2.ID)) {
+			if (cmd.equals(ChatProtocol.ID)) {
 				// data = aaa
 				if (data != null && data.length() > 0) {
 					id = data;
 					// 새로운 접속자가 추가되었기 때문에 리스트 재전송
-					sendAllMessage(ChatProtocol2.CHATLIST + ":" + getIds());
+					sendAllMessage(ChatProtocol.CHATLIST + ":" + getIds());
 					// 모든 접속자에게 입장 메세지를 전송
-					sendAllMessage(ChatProtocol2.CHATALL + ":" + "[" + id + "]님이 입장하였습니다.");
+					sendAllMessage(ChatProtocol.CHATALL + ":" + "[" + id + "]님이 입장하였습니다.");
 				}
-			} else if (cmd.equals(ChatProtocol2.CHAT)) {
+			} else if (cmd.equals(ChatProtocol.CHAT)) {
 				// data : bbb;밥먹자
 				idx = data.indexOf(';');
 				cmd/* bbb */ = data.substring(0, idx);
@@ -115,22 +115,22 @@ public class ChatServer2 {
 				// bbb 클라이언트 객체
 				ClientThread2 ct = findClient(cmd);
 				if (ct != null) {
-					ct.sendMessage(ChatProtocol2.CHAT + ":" + "[" + id + "(S)]" + data);
+					ct.sendMessage(ChatProtocol.CHAT + ":" + "[" + id + "(S)]" + data);
 				} else {// 내 자신에게 보냄
-					sendMessage(ChatProtocol2.CHAT + ":" + "[" + cmd + "] 접속자가 아닙니다.");
+					sendMessage(ChatProtocol.CHAT + ":" + "[" + cmd + "] 접속자가 아닙니다.");
 				}
-			} else if (cmd.equals(ChatProtocol2.MESSAGE)) {
+			} else if (cmd.equals(ChatProtocol.MESSAGE)) {
 				idx = data.indexOf(';');
 				cmd = data.substring(0, idx);
 				data = data.substring(idx);
 				ClientThread2 ct = findClient(cmd);
 				if (ct != null) {
-					ct.sendMessage(ChatProtocol2.MESSAGE + ":" + id + ";" + data);
+					ct.sendMessage(ChatProtocol.MESSAGE + ":" + id + ";" + data);
 				} else {// 내 자신에게 보냄
-					sendMessage(ChatProtocol2.CHAT + ":" + "[" + cmd + "] 접속자가 아닙니다.");
+					sendMessage(ChatProtocol.CHAT + ":" + "[" + cmd + "] 접속자가 아닙니다.");
 				}
-			} else if (cmd.equals(ChatProtocol2.CHATALL)) {
-				sendAllMessage(ChatProtocol2.CHATALL+":"+"["+id+"]"+data);
+			} else if (cmd.equals(ChatProtocol.CHATALL)) {
+				sendAllMessage(ChatProtocol.CHATALL+":"+"["+id+"]"+data);
 			}
 		}
 

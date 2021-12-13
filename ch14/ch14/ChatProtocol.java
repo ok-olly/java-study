@@ -1,6 +1,6 @@
 package ch14;
 
-public class ChatProtocol2 {
+public class ChatProtocol {
 	
 	public static final String ID = "ID";
 	//(Client -> Server) ID:aaa

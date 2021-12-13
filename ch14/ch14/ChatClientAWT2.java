@@ -146,7 +146,7 @@ public class ChatClientAWT2 extends MFrame implements ActionListener, Runnable {
 				return;// 메소드 중간에 빠져나가는 결과. 즉 밑에 소스는 의미가 없어진다. 반복문의 break같은 느낌
 			}
 			if (!flag/* 아이디입력 */) {
-				sendMessage(ChatProtocol2.ID + ":" + str); // 서버전송
+				sendMessage(ChatProtocol.ID + ":" + str); // 서버전송
 				setTitle(getTitle() + "-" + str + "님 반갑습니다.");
 				area.setText("");
 				tf3.setText("");
@@ -155,10 +155,10 @@ public class ChatClientAWT2 extends MFrame implements ActionListener, Runnable {
 			} else/* 일반채팅 */ {
 				int i = list.getSelectedIndex();
 				if (i == -1 || i == 0) { // 전체채팅
-					sendMessage(ChatProtocol2.CHATALL + ":" + str);
+					sendMessage(ChatProtocol.CHATALL + ":" + str);
 				} else { // 귓속말 채팅
 					String id = list.getSelectedItem();// 선택한 id값을 리턴해온다.
-					sendMessage(ChatProtocol2.CHAT + ":" + id + ";" + str);
+					sendMessage(ChatProtocol.CHAT + ":" + id + ";" + str);
 				}
 				tf3.setText("");
 				tf3.requestFocus();
@@ -170,7 +170,7 @@ public class ChatClientAWT2 extends MFrame implements ActionListener, Runnable {
 		int idx = line.indexOf(":");
 		String cmd = line.substring(0, idx);
 		String data = line.substring(idx + 1);
-		if (cmd.equals(ChatProtocol2.CHATLIST)) {
+		if (cmd.equals(ChatProtocol.CHATLIST)) {
 			// data:aaa;bbb;ccc
 			list.removeAll();// 기존에 추가된 item을 모두 삭제
 			list.add(listTitle);
@@ -178,10 +178,10 @@ public class ChatClientAWT2 extends MFrame implements ActionListener, Runnable {
 			while (st.hasMoreTokens()) {
 				list.add(st.nextToken());
 			}
-		} else if (cmd.equals(ChatProtocol2.CHAT) || cmd.equals(ChatProtocol2.CHATALL)) {
+		} else if (cmd.equals(ChatProtocol.CHAT) || cmd.equals(ChatProtocol.CHATALL)) {
 			// CHATALL:[aaa]채팅메세지 & CHAT:[aaa(S)]채팅메세지
 			area.append(data + "\n");
-		} else if (cmd.equals(ChatProtocol2.MESSAGE)) {
+		} else if (cmd.equals(ChatProtocol.MESSAGE)) {
 			// data -> bbb;밥먹자
 			idx = data.indexOf(';');
 			cmd/* bbb */ = data.substring(0, idx);
@@ -270,7 +270,7 @@ public class ChatClientAWT2 extends MFrame implements ActionListener, Runnable {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == send) {
-				sendMessage(ChatProtocol2.MESSAGE + ":" + id + ";" + ta.getText());
+				sendMessage(ChatProtocol.MESSAGE + ":" + id + ";" + ta.getText());
 			}
 			setVisible(false);
 			dispose();
